@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Reply;
 use App\Notifications\TopicReplied;
 
+
 // creating, created, updating, updated, saving,
 // saved,  deleting, deleted, restoring, restored
 
@@ -28,5 +29,9 @@ class ReplyObserver
 
         // 通知作者话题被回复了
         $topic->user->notify(new TopicReplied($reply));
+    }
+    public function deleted(Reply $reply)
+    {
+        $reply->topic->decrement('reply_count', 1);
     }
 }
