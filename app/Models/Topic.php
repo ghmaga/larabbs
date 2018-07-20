@@ -6,14 +6,22 @@ class Topic extends Model
 {
     protected $fillable = ['title', 'body', 'category_id', 'excerpt', 'slug'];
 
-    public function category() // 文章所属分类
+    // 模型关联 文章所属分类
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function user() // 文章所属用户
+    // 模型关联 文章所属用户
+    public function user()
     {
         return $this->belongsto(User::class);
+    }
+
+    // 模型关联 文章回复
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
     }
 
     public function link($params = [])
